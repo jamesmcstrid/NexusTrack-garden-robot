@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 
 # --- KONFIGURATION ---
 BROKER_IP = "192.168.0.13"  # <--- Ändra till din Proxmox-IP!
-TOPIC = "robot/telemetry"
+TOPIC = "nexus/robot1/telemetry"
 
 client = mqtt.Client()
 
