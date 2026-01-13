@@ -1,0 +1,28 @@
+# NexusTrack AI Context Rules
+
+# 1. TOKEN MANAGEMENT (Rate Limit Protection)
+# Ignorera tunga binära filer och stora dokumentmappar för att hålla oss under 30k TPM.
+IGNORE_DIRECTORIES:
+  - "research/**"           # Innehåller ofta tunga anteckningar/filer
+  - "docs/assets/**"        # Bilder och media
+  - ".git/**"               # Git-historik drar massor av tokens
+
+# Ignorera specifika filtyper som inte behövs för kodning
+IGNORE_FILE_EXTENSIONS:
+  - ".png"                  # Bilder
+  - ".jpg"
+  - ".stl"                  # 3D-modeller (tunga)
+  - ".step"                 # CAD-filer
+  - ".pdf"
+
+# 2. CORE CONTEXT (Prioritera alltid dessa)
+# Dessa filer definierar hela projektets intelligens.
+ALWAYS_PRIORITIZE:
+  - "📐 CAD/fusion360/parameters.txt"  # Master-måtten för roboten
+  - "plans/nexus_firmware_architecture.md" # Arkitekturplanen
+  - "software/arduino/nexus_firmware/config.h" # Pin-konfigurationen
+
+# 3. BEHAVIOR RULES
+# - Innan du kör tunga kommandon, kontrollera om informationen finns i parameters.txt.
+# - Skriv aldrig binär data i chatten.
+# - Om du når en rate limit, pausa och föreslå en förenklad prompt.
