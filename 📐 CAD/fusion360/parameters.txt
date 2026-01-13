@@ -1,0 +1,9 @@
+// NexusTrack Master Parameters
+Platta_Bredd = 180 mm  // Total bredd på chassiplattan
+Platta_Langd = 260 mm  // Total längd på chassiplattan
+Platta_Tjocklek = 3 mm // Styvhet
+Mega_X = 96.52 mm      // CC-mått Elegoo Mega
+Mega_Y = 50.8 mm       // CC-mått Elegoo Mega
+L298N_Dist = 37 mm     // Kvadratisk hålbild motorstyrning
+Mobil_Vinkel = 10 deg  // Kamerans lutning framåt
+Sensor_Oga_D = 16.5 mm // Diameter för HC-SR04 ögon
