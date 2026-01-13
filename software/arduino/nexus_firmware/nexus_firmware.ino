@@ -3,19 +3,21 @@
 
 /**
  * NexusTrack Core Firmware - Phase 0 (RC-Car)
- * Version: 1.0 (2026-01-13)
+ * Version: 1.1 (Uppdaterad med officiell namngivning)
  */
 
 Servo steeringServo;
 
+// Globala variabler för att sendTelemetry ska kunna läsa dem
+long distFC, distFL, distFR, distBL, distBR;
+
 void setup() {
-  // Starta seriell kommunikation för OnePlus 8T/Felsökning
   Serial.begin(115200);
-  while (!Serial) { ; } // Vänta på anslutning
+  while (!Serial) { ; } 
   
   Serial.println("--- NexusTrack System Init ---");
 
-  // Konfigurera Motorer (L298N)
+  // Motor-pins konfigureras här (Se till att dessa finns i config.h)
   pinMode(PIN_MOTOR_L_ENA, OUTPUT);
   pinMode(PIN_MOTOR_L_IN1, OUTPUT);
   pinMode(PIN_MOTOR_L_IN2, OUTPUT);
@@ -23,11 +25,9 @@ void setup() {
   pinMode(PIN_MOTOR_R_IN4, OUTPUT);
   pinMode(PIN_MOTOR_R_ENB, OUTPUT);
 
-  // Konfigurera Servo
   steeringServo.attach(PIN_SERVO_STEERING);
-  steeringServo.write(90); // Centrera styrning
+  steeringServo.write(90); 
 
-  // Konfigurera alla Ultraljudssensorer
   setupSensor(PIN_SENSOR_FC_TRIG, PIN_SENSOR_FC_ECHO);
   setupSensor(PIN_SENSOR_FL_TRIG, PIN_SENSOR_FL_ECHO);
   setupSensor(PIN_SENSOR_FR_TRIG, PIN_SENSOR_FR_ECHO);
@@ -38,31 +38,44 @@ void setup() {
 }
 
 void loop() {
-  // 1. Läs av alla sensorer
-  long distFC = getDistance(PIN_SENSOR_FC_TRIG, PIN_SENSOR_FC_ECHO);
-  long distFL = getDistance(PIN_SENSOR_FL_TRIG, PIN_SENSOR_FL_ECHO);
-  long distFR = getDistance(PIN_SENSOR_FR_TRIG, PIN_SENSOR_FR_ECHO);
-  long distBL = getDistance(PIN_SENSOR_BL_TRIG, PIN_SENSOR_BL_ECHO);
-  long distBR = getDistance(PIN_SENSOR_BR_TRIG, PIN_SENSOR_BR_ECHO);
+  // 1. Läs av alla sensorer (sparas i globala variabler)
+  distFC = getDistance(PIN_SENSOR_FC_TRIG, PIN_SENSOR_FC_ECHO);
+  distFL = getDistance(PIN_SENSOR_FL_TRIG, PIN_SENSOR_FL_ECHO);
+  distFR = getDistance(PIN_SENSOR_FR_TRIG, PIN_SENSOR_FR_ECHO);
+  distBL = getDistance(PIN_SENSOR_BL_TRIG, PIN_SENSOR_BL_ECHO);
+  distBR = getDistance(PIN_SENSOR_BR_TRIG, PIN_SENSOR_BR_ECHO);
 
-  // 2. Skicka data till OnePlus 8T (JSON-format för framtida MQTT)
-  Serial.print("{\"FC\":"); Serial.print(distFC);
-  Serial.print(",\"FL\":"); Serial.print(distFL);
-  Serial.print(",\"FR\":"); Serial.print(distFR);
-  Serial.print(",\"BL\":"); Serial.print(distBL);
-  Serial.print(",\"BR\":"); Serial.print(distBR);
-  Serial.println("}");
+  // 2. Skicka data till OnePlus 8T med officiella nycklar
+  sendTelemetry();
 
-  // 3. Säkerhetsstopp: Om något är närmare än SAFE_DISTANCE_CM
+  // 3. Säkerhetsstopp
   if (distFC < SAFE_DISTANCE_CM && distFC > 0) {
     stopMotors();
-    Serial.println("! SAFETY STOP: Obstacle Ahead !");
+    // Skicka även statusuppdatering till Node-RED
+    Serial.print("{\""); Serial.print(J_STAT); Serial.println("\":\"SAFETY_STOP\"}");
   }
 
-  delay(100); // Kort paus för stabilitet
+  delay(100); 
 }
 
 // --- HJÄLPFUNKTIONER ---
+
+void sendTelemetry() {
+  // Här använder vi namnen från config.h (J_FC, J_FL etc.)
+  Serial.print("{");
+  Serial.print("\"" J_FC "\":"); Serial.print(distFC); Serial.print(",");
+  Serial.print("\"" J_FL "\":"); Serial.print(distFL); Serial.print(",");
+  Serial.print("\"" J_FR "\":"); Serial.print(distFR); Serial.print(",");
+  Serial.print("\"" J_BL "\":"); Serial.print(distBL); Serial.print(",");
+  Serial.print("\"" J_BR "\":"); Serial.print(distBR); Serial.print(",");
+  Serial.print("\"" J_BATT "\":"); Serial.print(calculateBattery());
+  Serial.println("}");
+}
+
+int calculateBattery() {
+  // Provisorisk funktion - returnerar 100% tills vi kopplat spänningsdelaren
+  return 100; 
+}
 
 void setupSensor(int trig, int echo) {
   pinMode(trig, OUTPUT);
@@ -76,10 +89,10 @@ long getDistance(int trig, int echo) {
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
   
-  long duration = pulseIn(echo, HIGH, 30000); // Timeout efter 30ms
+  long duration = pulseIn(echo, HIGH, 30000); 
   long distance = duration * 0.034 / 2;
   
-  if (distance == 0) return MAX_DISTANCE_CM; // Inget eko = fri väg
+  if (distance <= 0 || distance > MAX_DISTANCE_CM) return MAX_DISTANCE_CM; 
   return distance;
 }
 
@@ -90,4 +103,37 @@ void stopMotors() {
   digitalWrite(PIN_MOTOR_R_IN4, LOW);
   analogWrite(PIN_MOTOR_L_ENA, 0);
   analogWrite(PIN_MOTOR_R_ENB, 0);
+}
+// --- MOTORSTYRNING: KÖR FRAMÅT ---
+void driveForward(int speed) {
+  // Vänster motor
+  digitalWrite(PIN_MOTOR_L_IN1, HIGH);
+  digitalWrite(PIN_MOTOR_L_IN2, LOW);
+  analogWrite(PIN_MOTOR_L_ENA, speed);
+
+  // Höger motor
+  digitalWrite(PIN_MOTOR_R_IN3, HIGH);
+  digitalWrite(PIN_MOTOR_R_IN4, LOW);
+  analogWrite(PIN_MOTOR_R_ENB, speed);
+}
+
+// --- UPPDATERAD LOOP FÖR AUTONOMI ---
+void loop() {
+  // 1. Läs sensorer
+  distFC = getDistance(PIN_SENSOR_FC_TRIG, PIN_SENSOR_FC_ECHO);
+  // ... läs övriga sensorer ...
+
+  // 2. Skicka data till Dashboard (LXC 104)
+  sendTelemetry();
+
+  // 3. Beslutsfattning (Logik)
+  if (distFC < SAFE_DISTANCE_CM && distFC > 0) {
+    stopMotors(); // Hinder! Stanna omedelbart.
+    Serial.print("{\""); Serial.print(J_STAT); Serial.println("\":\"OBSTACLE_STOP\"}");
+  } else {
+    driveForward(DEFAULT_SPEED); // Fri väg! Kör framåt.
+    Serial.print("{\""); Serial.print(J_STAT); Serial.println("\":\"DRIVING\"}");
+  }
+
+  delay(100); 
 }
