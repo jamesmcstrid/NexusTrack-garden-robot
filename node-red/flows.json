@@ -1,0 +1,549 @@
+[
+    {
+        "id": "381d2ce1ac5da1c6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d1f9f0fb03750dae",
+        "type": "mqtt-broker",
+        "name": "Proxmox Broker",
+        "broker": "192.168.0.13",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e21d9ea4873cb0e9",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "3fced2f5e50e62ce",
+        "type": "ui_tab",
+        "name": "Robotkontroll",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "e408b50e76a77fdf",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "3fced2f5e50e62ce",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3708e9d167d6be44",
+        "type": "ui_gauge",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "group": "e408b50e76a77fdf",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "-40",
+        "max": "+40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 710,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1ea96c3782817d87",
+        "type": "ui_gauge",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "group": "e408b50e76a77fdf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Battery",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 720,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a3825a918fb60873",
+        "type": "debug",
+        "z": "381d2ce1ac5da1c6",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "cf68e82d079b8864",
+        "type": "inject",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Systemet är online",
+        "payloadType": "str",
+        "x": 250,
+        "y": 720,
+        "wires": [
+            [
+                "bea24f825caa6e57"
+            ]
+        ]
+    },
+    {
+        "id": "bea24f825caa6e57",
+        "type": "mqtt out",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "topic": "robot/command",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d1f9f0fb03750dae",
+        "x": 480,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "1ff29a5cd323fb8d",
+        "type": "mqtt in",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "topic": "nexus/robot1/phone_status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d1f9f0fb03750dae",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [
+                "08d1c4a20e3952a1"
+            ]
+        ]
+    },
+    {
+        "id": "08d1c4a20e3952a1",
+        "type": "function",
+        "z": "381d2ce1ac5da1c6",
+        "name": "function 2",
+        "func": "// msg.payload innehåller: {\"phone_bat\": 93, \"phone_temp\": 28, \"charging\": true}\nvar data = JSON.parse(msg.payload);\n\nreturn [\n    { payload: data.phone_bat },                     // Utgång 1 -> Batteri Gauge\n    { payload: data.phone_temp },                    // Utgång 2 -> Temp Gauge\n    { payload: data.charging ? \"Laddar ⚡\" : \"Batteridrift 🔋\" } // Utgång 3 -> Text\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "1ea96c3782817d87"
+            ],
+            [
+                "3708e9d167d6be44"
+            ],
+            [
+                "efc886dbde3f8308"
+            ]
+        ]
+    },
+    {
+        "id": "22830d8605a518ca",
+        "type": "mqtt in",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "topic": "nexus/robot1/telemetry",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d1f9f0fb03750dae",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 540,
+        "wires": [
+            [
+                "410e45014f2af51d"
+            ]
+        ]
+    },
+    {
+        "id": "410e45014f2af51d",
+        "type": "json",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 490,
+        "y": 540,
+        "wires": [
+            [
+                "48b5ffabf7aea521"
+            ]
+        ]
+    },
+    {
+        "id": "af06a4aa33e91ad1",
+        "type": "mqtt in",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "topic": "nexus/robot1/gps",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d1f9f0fb03750dae",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 600,
+        "wires": [
+            [
+                "c0a95203e32526e2"
+            ]
+        ]
+    },
+    {
+        "id": "c0a95203e32526e2",
+        "type": "function",
+        "z": "381d2ce1ac5da1c6",
+        "name": "Format for Map",
+        "func": "var data = msg.payload;\nmsg.payload = {\n    name: \"Nexus-1\",\n    lat: data.lat,\n    lon: data.lon,\n    icon: \"robot\",\n    layer: \"Robotar\",\n    color: \"blue\",\n    accuracy: data.acc\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 600,
+        "wires": [
+            [
+                "a8e07b516de4fb9f"
+            ]
+        ]
+    },
+    {
+        "id": "439c15c86c490eda",
+        "type": "ui_text_input",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "e408b50e76a77fdf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "robot/command",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 220,
+        "y": 660,
+        "wires": [
+            [
+                "90e392fa1f161485"
+            ]
+        ]
+    },
+    {
+        "id": "90e392fa1f161485",
+        "type": "mqtt out",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d1f9f0fb03750dae",
+        "x": 490,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "a8e07b516de4fb9f",
+        "type": "worldmap",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "lat": "",
+        "lon": "",
+        "zoom": "",
+        "layer": "",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "false",
+        "showgrid": "false",
+        "showruler": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "DR,CO,RA,DN",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,UKOS",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 720,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "48b5ffabf7aea521",
+        "type": "ui_chart",
+        "z": "381d2ce1ac5da1c6",
+        "name": "",
+        "group": "e408b50e76a77fdf",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 710,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "efc886dbde3f8308",
+        "type": "ui_text",
+        "z": "381d2ce1ac5da1c6",
+        "group": "e408b50e76a77fdf",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 710,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a20f1a55b1453c88",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-contrib-web-worldmap": "5.5.4"
+        }
+    }
+]
