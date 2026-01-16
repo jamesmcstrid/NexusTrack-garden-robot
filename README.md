@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 283c3960b067c79f73afc2152333ecfce405a63a
 NexusTrack: An open-source, modular autonomous robot platform utilizing a smartphone (OnePlus 8T) as its primary compute brain. Designed for versatile garden maintenance including lawn mowing, snow removal, and cargo transport. Powered by Python, Arduino, and MQTT.
 =======
 # 🚜 NexusTrack - Modular Autonomous Robot
