@@ -17,5 +17,7 @@ NexusTrack är en öppen, modulär plattform för trädgårdsrobotik. Genom att 
 ## 🛠 Status
 - [x] Projektstruktur tvättad och redo.
 - [x] MIT-Licens aktiverad.
-- [ ] Byggstart: Torsdag 15 Januari!
-
+- [x] Byggstart: Torsdag 15 Januari!
+- [ x] RC-bilen uppkopplad och sensorerna funkade och motorern snurrade 
+- [ ] Skapa en plattform för alla delar på taket av RC-bilen
+- [ ] Provköra och se så att allt i fas 0 funkar
