@@ -26,3 +26,36 @@ ALWAYS_PRIORITIZE:
 # - Innan du kör tunga kommandon, kontrollera om informationen finns i parameters.txt.
 # - Skriv aldrig binär data i chatten.
 # - Om du når en rate limit, pausa och föreslå en förenklad prompt.
+# 4. CODE STYLE (Lägg till detta under befintligt innehåll)
+CODE_STYLE:
+  language: "svenska för kommentarer, engelska för kod"
+  cpp_style: "Arduino style guide"
+  indentation: 2
+  max_function_lines: 50
+
+NAMING_CONVENTIONS:
+  classes: "PascalCase (ex: MotorController)"
+  functions: "camelCase (ex: readSensor)"
+  constants: "UPPER_CASE (ex: MAX_SPEED)"
+  variables: "snake_case (ex: sensor_value)"
+
+# 5. SAFETY RULES (Kritiskt för robotprojekt!)
+SAFETY_CRITICAL:
+  - "ALLTID battery voltage check före motor start"
+  - "Emergency stop i alla loopar"
+  - "Timeout på alla while-loops (max 5s)"
+  - "Range-check på alla sensor värden"
+
+# 6. ARDUINO SPECIFICS
+ARDUINO_CONFIG:
+  platform: "Arduino Mega 2560"
+  system_voltage: "24V"
+  pwm_range: "0-255"
+  i2c_addresses: "Se docs/i2c-addresses.md"
+  pin_definitions: "software/arduino/nexus_firmware/config.h"
+
+# 7. TESTING REQUIREMENTS
+TESTING:
+  - "Testa varje funktion isolerat först"
+  - "Använd Serial.print för debugging"
+  - "Benchmark kritiska funktioner"
