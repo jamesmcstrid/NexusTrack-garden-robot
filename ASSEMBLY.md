@@ -1,8 +1,3 @@
-Självklart! Här är en komplett checklist i Markdown-format. Du kan kopiera koden nedan och skapa en ny fil på GitHub som heter till exempel `ASSEMBLY.md` eller klistra in det i din `README.md`.
-
-Detta är din "bibel" för torsdag när allt ska kopplas ihop fysiskt.
-
----
 
 # 🚀 NexusTrack Go-Live Checklist
 
