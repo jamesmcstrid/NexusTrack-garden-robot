@@ -1,0 +1,10 @@
+{
+  "autodeskAddin": {
+    "author": "NexusTrack Project",
+    "description": "Tvåvånings robotplattform (Lower + Upper floor + 4× Pillar)",
+    "id": "nexus-carrier-v8",
+    "version": "8.0.0",
+    "title": "Nexus Carrier v8",
+    "platforms": ["Windows", "Mac", "Linux"]
+  }
+}
